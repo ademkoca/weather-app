@@ -113,3 +113,6 @@ footer a {
 footer span {
     margin: 0 4px;
 }
+footer strong {
+    margin-right: 5px;
+}
