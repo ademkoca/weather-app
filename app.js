@@ -92,7 +92,7 @@ function getWeatherData() {
         min = "0" + min;
     }
     // let url = "sample.json";
-    let url = "http://api.weatherapi.com/v1/forecast.json?key=ffa4e34cd31f4237bb4155138212309&q=" + query_part + "&days=1&aqi=no&alerts=no";
+    let url = "https://api.weatherapi.com/v1/forecast.json?key=ffa4e34cd31f4237bb4155138212309&q=" + query_part + "&days=1&aqi=no&alerts=no";
     // let url = "http://api.weatherapi.com/v1/forecast.json?key=ffa4e34cd31f4237bb4155138212309&q=novi pazar&days=1&aqi=no&alerts=no";
     fetch(url)
         .then(response => response.json())
@@ -150,7 +150,7 @@ function getWeatherData() {
 
     html = "";
 
-    url = "http://api.weatherapi.com/v1/forecast.json?key=ffa4e34cd31f4237bb4155138212309&q=" + query_part + "&days=7&aqi=no&alerts=no";
+    url = "https://api.weatherapi.com/v1/forecast.json?key=ffa4e34cd31f4237bb4155138212309&q=" + query_part + "&days=7&aqi=no&alerts=no";
     fetch(url)
         .then(response => response.json())
         .then(data => {
