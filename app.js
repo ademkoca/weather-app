@@ -42,12 +42,14 @@ function set_query_part() {
     if (myLocation.value.trim() != "") {
         query_part = myLocation.value;
         getWeatherData();
+        
 
     }
     else {
         query_part = myLat + "," + myLong;
         getWeatherData();
     }
+    myLocation.value="";
 }
 
 function getWeatherData() {
@@ -113,7 +115,7 @@ function getWeatherData() {
               `;
                 document.getElementById('weather-data').innerHTML = htmlSegment;
                 htmlSegment = `
-                <p class="weather-p">It's <span class="lowercase">${data.current.condition.text} now.</span><span> Wind: ${data.current.wind_kph} m/s. Humidity: ${data.current.humidity}%</p>
+                <p class="weather-p">It's <span class="lowercase">${data.current.condition.text} now</span><br><span> Wind: ${data.current.wind_kph} m/s</span><br><span> Humidity: ${data.current.humidity}%</span></p>
                 `;
                 document.getElementById('weather-bottom').innerHTML = htmlSegment;
             }
