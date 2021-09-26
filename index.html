@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <link rel="icon" href="img/sun.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Weather forecast</title>
+  </head>
+  <body>
+    <div class="container-fluid" id="main-container">
+      <div class="content">
+        <div id="search-bar">
+          <div class="input-group mb-3">
+            <input
+            id="search"
+              type="text"
+              class="form-control"
+              placeholder="Search places..."
+              aria-label="Search places"
+              aria-describedby="button-addon2"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              id="button-addon2"
+            >
+              GO!
+            </button>
+          </div>
+        </div>
+        <div id="weather-data">
+          <h1>Good morning</h1>
+          <div class="clock" id="timeNow">11:51</div>
+          <p id="location">in Novi Pazar, Serbia</p>
+        </div>
+        <div id="weather-bottom">
+          <p>It's 12 °C now. Wind: 3 m/s. Humidity: 87%</p>
+        </div>
+        <div id="seven-days">
+          <div class="hourly"></div>
+
+        </div>
+        <div id="daily">
+
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
