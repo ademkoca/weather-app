@@ -1,8 +1,8 @@
 #main-container {
-    background: url('img/day.jpg') repeat-y;
+    background: url('img/day1.jpg') repeat-y;
     /* background: url('img/night2.jpg') repeat-y; */
     /* background-color:black; */
-    max-width: 1000px;
+    max-width: 1440px;
     position: relative; 
     width: 100%;
 
