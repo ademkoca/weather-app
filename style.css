@@ -1,5 +1,9 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+}
 #main-container {
-    background: url('img/day1.jpg') repeat-y;
+    background: url('img/day.jpg') repeat-y;
     /* background: url('img/night2.jpg') repeat-y; */
     /* background-color:black; */
     max-width: 1440px;
@@ -96,4 +100,16 @@ grid-template-columns: 1.5fr 1.5fr 1fr 1fr;
 .daily-row span {
     color: white;
     align-self: center;
+}
+footer {
+ background-color: white;
+ text-align: center;
+}
+footer a {
+    text-decoration: none;
+    /* margin-right: 10px; */
+}
+
+footer span {
+    margin: 0 4px;
 }

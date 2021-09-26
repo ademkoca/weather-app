@@ -8,15 +8,15 @@ function getLocation() {
 
 var myLat = "";
 var myLong = "";
-let query_part="";
-query_part=myLat + "," + myLong;
+let query_part = "";
+query_part = myLat + "," + myLong;
 
 function showPosition(position) {
     let lat = position.coords.latitude + " ";
     let lon = position.coords.longitude + " ";
     myLat = lat.substring(0, 5);
     myLong = lon.substring(0, 5);
-    query_part=myLat + "," + myLong;
+    query_part = myLat + "," + myLong;
     getWeatherData();
     // console.log("Latitude: " + myLat + ", Longitude: " + myLong);
 
@@ -32,17 +32,22 @@ const myLocation = document.getElementById('search');
 const searchbutton = document.getElementById('button-addon2');
 
 searchbutton.addEventListener('click', set_query_part);
+myLocation.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        set_query_part();
+    }
+});
 
-function set_query_part(){
-if (myLocation.value.trim()!="") {
-    query_part=myLocation.value;
-    getWeatherData();
+function set_query_part() {
+    if (myLocation.value.trim() != "") {
+        query_part = myLocation.value;
+        getWeatherData();
 
-}
-else {
-query_part=myLat + "," + myLong;
-getWeatherData();
-}
+    }
+    else {
+        query_part = myLat + "," + myLong;
+        getWeatherData();
+    }
 }
 
 function getWeatherData() {
@@ -73,7 +78,7 @@ function getWeatherData() {
         case 22:
         case 23:
             welcome = "Good evening";
-            document.getElementById('main-container').style.background="url(img/night.jpg) repeat-y";
+            document.getElementById('main-container').style.background = "url(img/night.jpg) repeat-y";
             break;
 
         case 0:
