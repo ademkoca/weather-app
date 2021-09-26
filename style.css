@@ -15,7 +15,7 @@
 .content {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 50px 200px 100px 160px 500px;    
+    grid-template-rows: 50px 200px 150px 160px 500px;    
     padding-top: 10px;
 }
 
@@ -55,6 +55,11 @@ h1 {
     color: white;
     font-weight: 400;
     text-align: center;
+}
+
+.weather-p small {
+    font-size: 10px;
+    text-align: right;
 }
 
 #seven-days {

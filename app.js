@@ -108,14 +108,14 @@ function getWeatherData() {
                 // data.location.forEach(element => {
 
                 // });
-                let htmlSegment = `
-              <h1>${welcome}</h1>
+                let htmlSegment = `<h1>${welcome}</h1>
           <div class="clock" id="timeNow">${data.current.temp_c} °C</div>
           <p class="weather-p" id="location">in ${data.location.name}, ${data.location.country}</p>              
               `;
                 document.getElementById('weather-data').innerHTML = htmlSegment;
                 htmlSegment = `
-                <p class="weather-p">It's <span class="lowercase">${data.current.condition.text} now</span><br><span> Wind: ${data.current.wind_kph} m/s</span><br><span> Humidity: ${data.current.humidity}%</span></p>
+                <p class="weather-p">It's <span class="lowercase">${data.current.condition.text} now.</span><span> Wind: ${data.current.wind_kph} m/s</span><br><span> Humidity: ${data.current.humidity}%</span></p>
+                <p class="weather-p"><small>Last updated: ${data.current.last_updated}</small></p>
                 `;
                 document.getElementById('weather-bottom').innerHTML = htmlSegment;
             }
