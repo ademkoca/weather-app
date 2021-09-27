@@ -23,11 +23,6 @@ function showPosition(position) {
 
 
 }
-
-getLocation();
-
-
-
 const myLocation = document.getElementById('search');
 const searchbutton = document.getElementById('button-addon2');
 
@@ -157,19 +152,21 @@ function getWeatherData() {
 
     html = "";
 
-    url = "https://api.weatherapi.com/v1/forecast.json?key=ffa4e34cd31f4237bb4155138212309&q=" + query_part + "&days=7&aqi=no&alerts=no";
+    url = "https://api.weatherapi.com/v1/forecast.json?key=ffa4e34cd31f4237bb4155138212309&q=" + query_part + "&days=10&aqi=no&alerts=no";
     fetch(url)
         .then(response => response.json())
         .then(data => {
+            // console.log(data.forecast.forecastday.length);
             data.forecast.forecastday.forEach(day => {
                 var timestamp = day.date_epoch;
+                // console.log(timestamp);
                 var a = new Date(timestamp * 1000);
                 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
                 var dayOfWeek = days[a.getDay()];
                 let htmlSegment = `<div class="daily-row"><span>${dayOfWeek}</span><span><img src="${day.day.condition.icon}"></span><span>${day.day.maxtemp_c} °C</span><span>${day.day.mintemp_c} °C</span></div>
                 `;
                 html += htmlSegment;
-                console.log(html);
+                // console.log(html);
                 document.getElementById('daily').innerHTML = html;
 
             });
