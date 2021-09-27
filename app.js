@@ -76,7 +76,7 @@ function getWeatherData() {
         case 23:
             welcome = "Good evening";
             // document.getElementById('main-container').style.background="linear-gradient(#575b76, #424663)";
-            document.getElementById('main-container').style.background="url('img/night.jpg')";
+            document.getElementById('main-container').style.background = "url('img/night.jpg')";
             break;
 
         case 0:
@@ -86,8 +86,8 @@ function getWeatherData() {
         case 3:
         case 2:
         default: welcome = "Good morning";
-        // document.getElementById('main-container').style.background="linear-gradient(#575b76, #424663)";
-        document.getElementById('main-container').style.background="url('img/night.jpg')";
+            // document.getElementById('main-container').style.background="linear-gradient(#575b76, #424663)";
+            document.getElementById('main-container').style.background = "url('img/night.jpg')";
 
     }
     // console.log(welcome);
@@ -96,7 +96,7 @@ function getWeatherData() {
         min = "0" + min;
     }
     // let url = "sample.json";
-    let url = "https://api.weatherapi.com/v1/forecast.json?key=ffa4e34cd31f4237bb4155138212309&q=" + query_part + "&days=1&aqi=no&alerts=no";
+    let url = "https://api.weatherapi.com/v1/forecast.json?key=ffa4e34cd31f4237bb4155138212309&q=" + query_part + "&days=2&aqi=no&alerts=no";
     // let url = "http://api.weatherapi.com/v1/forecast.json?key=ffa4e34cd31f4237bb4155138212309&q=novi pazar&days=1&aqi=no&alerts=no";
     fetch(url)
         .then(response => response.json())
@@ -117,38 +117,47 @@ function getWeatherData() {
                 document.getElementById('weather-bottom').innerHTML = htmlSegment;
             }
 
-            // if (data.forecast) {
+            
             let html = "";
-            let forecastLength = data.forecast.forecastday.length;
-            let hourLength = data.forecast.forecastday[0].hour.length;
-            // console.log(forecastLength);
-            // console.log(hourLength);
-            // for (let i = 0; i <= forecastLength; i++) {
-            //     for (let j = 0; j <= hourLength; j++) {
-            //         // data.forecast.forecastday[i].hour[j].time;
-            //         // let dan=data.forecast.forecastday[0];
-            //         console.log(data.forecast.forecastday[i].hour[j].time);
-            //         let htmlSegment = `<div class="hourly"><p>${data.forecast.forecastday[i].hour[j].time}</p></div>              
-            //     `;
-            //     html+=htmlSegment;
-            //     }
-            // }
+            let firstHalf = "";
+            let SecondHalf = "";
+            let timenow = new Date();
+            let thishour = timenow.getHours();
+            // let thishour = 22;
 
-            data.forecast.forecastday.forEach(day => {
-                day.hour.forEach(hour => {
-                    // console.log(hour.time);
-                    let htmlSegment = `<div class="hourly">
-                    <p class="hourly-time">${hour.time.substring(11, 16)}</p>
-                    <p class="hourly-img"><img src="${hour.condition.icon}"></p>
-                    <p class="hourly-temp">${hour.temp_c} °C</p>
+           
+            firstHalf = ``;
+            for (let i = thishour; i < 24; i++) {
+               
+                firstHalf += `<div class="hourly">
+                    <p id="hour-${i % 24}" class="hourly-time">${data.forecast.forecastday[0].hour[i].time.substring(11, 16)}</p>
+                    <p class="hourly-img"><img src="${data.forecast.forecastday[0].hour[i].condition.icon}"></p>
+                    <p class="hourly-temp">${data.forecast.forecastday[0].hour[i].temp_c} °C</p>
                     </div>              
                  `;
-                    html += htmlSegment;
-                });
 
-            });
-            // console.log(html);
+            }
+            
+            
+            
+            for (let j = 0; j < thishour; j++) {
+               
+                SecondHalf += `<div class="hourly">
+                                <p class="hourly-time">${data.forecast.forecastday[1].hour[j].time.substring(11, 16)}</p>
+                                <p class="hourly-img"><img src="${data.forecast.forecastday[1].hour[j].condition.icon}"></p>
+                                <p class="hourly-temp">${data.forecast.forecastday[1].hour[j].temp_c} °C</p>
+                                </div>              
+                             `;
+
+            }
+            
+
+            html = firstHalf + SecondHalf;
+            
             document.getElementById('seven-days').innerHTML = html;
+document.getElementsByClassName("hourly-time")[0].innerHTML="Now";
+
+
 
         });
 
@@ -184,12 +193,12 @@ function getWeatherData() {
             });
             let newHtml = "";
             nextDay = (days.indexOf(lastDay) + 1) % 7;
-            let fourthDay = (nextDay+4);
-            
-           for (let i = nextDay; i <fourthDay; i++) {
+            let fourthDay = (nextDay + 4);
+
+            for (let i = nextDay; i < fourthDay; i++) {
                 lastMaxT++;
                 lastMinT++;
-                newHtml += `<div class="daily-row"><span>${days[i%7]}</span><span><img src="${lastIcon}"></span><span>${lastMaxT} °C</span><span>${lastMinT} °C</span></div>
+                newHtml += `<div class="daily-row"><span>${days[i % 7]}</span><span><img src="${lastIcon}"></span><span>${lastMaxT} °C</span><span>${lastMinT} °C</span></div>
             `;
                 // console.log(newHtml);
                 document.getElementById('daily').innerHTML = html + newHtml;
