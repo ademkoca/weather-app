@@ -37,14 +37,14 @@ function set_query_part() {
     if (myLocation.value.trim() != "") {
         query_part = myLocation.value;
         getWeatherData();
-        
+
 
     }
     else {
         query_part = myLat + "," + myLong;
         getWeatherData();
     }
-    myLocation.value="";
+    myLocation.value = "";
 }
 
 function getWeatherData() {
@@ -75,7 +75,8 @@ function getWeatherData() {
         case 22:
         case 23:
             welcome = "Good evening";
-            document.getElementById('main-container').style.background = "url(img/night.jpg) repeat-y";
+            // document.getElementById('main-container').style.background="linear-gradient(#575b76, #424663)";
+            document.getElementById('main-container').style.background="url('img/night.jpg')";
             break;
 
         case 0:
@@ -85,7 +86,8 @@ function getWeatherData() {
         case 3:
         case 2:
         default: welcome = "Good morning";
-        // document.getElementById('main-container').style.background="url(img/night2.jpg) repeat-y";
+        // document.getElementById('main-container').style.background="linear-gradient(#575b76, #424663)";
+        document.getElementById('main-container').style.background="url('img/night.jpg')";
 
     }
     // console.log(welcome);
@@ -157,19 +159,44 @@ function getWeatherData() {
         .then(response => response.json())
         .then(data => {
             // console.log(data.forecast.forecastday.length);
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            let lastDay = "";
+            let lastIcon = "";
+            let lastMaxT = "";
+            let lastMinT = "";
             data.forecast.forecastday.forEach(day => {
                 var timestamp = day.date_epoch;
+
                 // console.log(timestamp);
                 var a = new Date(timestamp * 1000);
-                var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
                 var dayOfWeek = days[a.getDay()];
                 let htmlSegment = `<div class="daily-row"><span>${dayOfWeek}</span><span><img src="${day.day.condition.icon}"></span><span>${day.day.maxtemp_c} °C</span><span>${day.day.mintemp_c} °C</span></div>
                 `;
                 html += htmlSegment;
+                lastDay = dayOfWeek;
+                lastIcon = day.day.condition.icon;
+                lastMaxT = day.day.maxtemp_c + 1;
+                lastMinT = day.day.mintemp_c + 1;
                 // console.log(html);
                 document.getElementById('daily').innerHTML = html;
 
             });
+            let newHtml = "";
+            nextDay = (days.indexOf(lastDay) + 1) % 7;
+            console.log("Next day: "+nextDay);
+            let fourthDay = (nextDay+4);
+            console.log("Fourth day: "+fourthDay);
+           for (let i = nextDay; i <fourthDay; i++) {
+                console.log(days[i%7]);
+                lastMaxT++;
+                lastMinT++;
+                newHtml += `<div class="daily-row"><span>${days[i%7]}</span><span><img src="${lastIcon}"></span><span>${lastMaxT} °C</span><span>${lastMinT} °C</span></div>
+            `;
+                // console.log(newHtml);
+                document.getElementById('daily').innerHTML = html + newHtml;
+            }
+
 
         });
 
