@@ -2,13 +2,38 @@
     box-sizing: border-box;
     font-family: 'Quicksand', sans-serif;
 }
+
+html {
+    --scrollbarBG: #CFD8DC;
+  --thumbBG: #90A4AE;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  #seven-days::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
+  #seven-days::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+  
+  #seven-days::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+
+
 #main-container {
     background: url('img/day.jpg') repeat-y;
     /* background: url('img/night2.jpg') repeat-y; */
     /* background-color:black; */
-    max-width: 1440px;
     position: relative; 
-    width: 100%;
+  
 
 }
 
@@ -67,7 +92,10 @@ h1 {
     grid-template-columns: repeat(24, minmax(100px, auto));
     overflow-y: hidden;
     overflow-x: scroll;
+    /* scrollbar-width: thin; */
+    
 }
+
 
 .hourly {
     grid-column: auto;
@@ -95,7 +123,7 @@ h1 {
 
 #daily {
     display: grid;
-    grid-template-rows: repeat(7, 70px);
+    grid-template-rows: repeat(3, 70px);
 }
 
 .daily-row{
@@ -105,6 +133,7 @@ grid-template-columns: 1.5fr 1.5fr 1fr 1fr;
 .daily-row span {
     color: white;
     align-self: center;
+    text-align: center;
 }
 footer {
  background-color: white;
@@ -113,6 +142,7 @@ footer {
 footer a {
     text-decoration: none;
     /* margin-right: 10px; */
+    width: 100%;
 }
 
 footer span {
