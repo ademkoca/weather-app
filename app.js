@@ -184,11 +184,9 @@ function getWeatherData() {
             });
             let newHtml = "";
             nextDay = (days.indexOf(lastDay) + 1) % 7;
-            console.log("Next day: "+nextDay);
             let fourthDay = (nextDay+4);
-            console.log("Fourth day: "+fourthDay);
+            
            for (let i = nextDay; i <fourthDay; i++) {
-                console.log(days[i%7]);
                 lastMaxT++;
                 lastMinT++;
                 newHtml += `<div class="daily-row"><span>${days[i%7]}</span><span><img src="${lastIcon}"></span><span>${lastMaxT} °C</span><span>${lastMinT} °C</span></div>
