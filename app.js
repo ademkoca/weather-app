@@ -102,6 +102,7 @@ function getWeatherData() {
         .then(response => response.json())
         .then(data => {
             if (data.location) {
+                // console.log((10/3.6).toString().substring(0,3));
                 // data.location.forEach(element => {
 
                 // });
@@ -111,7 +112,7 @@ function getWeatherData() {
               `;
                 document.getElementById('weather-data').innerHTML = htmlSegment;
                 htmlSegment = `
-                <p class="weather-p">It's <span class="lowercase">${data.current.condition.text} now.</span><span> Wind: ${data.current.wind_kph} m/s</span><br><span> Humidity: ${data.current.humidity}%</span></p>
+                <p class="weather-p">It's <span class="lowercase">${data.current.condition.text} now.</span><span> Wind: ${(data.current.wind_kph/3.6).toString().substring(0,3)} m/s</span><br><span> Humidity: ${data.current.humidity}%</span></p>
                 <p class="weather-p"><small>Last updated: ${data.current.last_updated}</small></p>
                 `;
                 document.getElementById('weather-bottom').innerHTML = htmlSegment;
