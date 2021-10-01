@@ -76,7 +76,8 @@ function getWeatherData() {
         case 23:
             welcome = "Good evening";
             // document.getElementById('main-container').style.background="linear-gradient(#575b76, #424663)";
-            document.getElementById('main-container').style.background = "url('img/night.jpg')";
+            // document.getElementById('main-container').style.background = "url('img/night.jpg')";
+            document.getElementById('main-container').style.background = '#222632';
             break;
 
         case 0:
@@ -86,8 +87,9 @@ function getWeatherData() {
         case 3:
         case 2:
         default: welcome = "Good morning";
-            // document.getElementById('main-container').style.background="linear-gradient(#575b76, #424663)";
-            document.getElementById('main-container').style.background = "url('img/night.jpg')";
+            // document.getElementById('main-container').style.background = "linear-gradient(#575b76, #424663)";
+        // document.getElementById('main-container').style.background = "url('img/night.jpg')";
+        document.getElementById('main-container').style.background = '#222632';
 
     }
     // console.log(welcome);
@@ -112,13 +114,13 @@ function getWeatherData() {
               `;
                 document.getElementById('weather-data').innerHTML = htmlSegment;
                 htmlSegment = `
-                <p class="weather-p">It's <span class="lowercase">${data.current.condition.text} now.</span><span> Wind: ${(data.current.wind_kph/3.6).toString().substring(0,3)} m/s</span><br><span> Humidity: ${data.current.humidity}%</span></p>
+                <p class="weather-p">It's <span class="lowercase">${data.current.condition.text} now.</span><span> Wind: ${(data.current.wind_kph / 3.6).toString().substring(0, 3)} m/s</span><br><span> Humidity: ${data.current.humidity}%</span></p>
                 <p class="weather-p"><small>Last updated: ${data.current.last_updated}</small></p>
                 `;
                 document.getElementById('weather-bottom').innerHTML = htmlSegment;
             }
 
-            
+
             let html = "";
             let firstHalf = "";
             let SecondHalf = "";
@@ -126,37 +128,54 @@ function getWeatherData() {
             let thishour = timenow.getHours();
             // let thishour = 22;
 
-           
+
             firstHalf = ``;
             for (let i = thishour; i < 24; i++) {
-               
+                let chance = "";
+                if (data.forecast.forecastday[0].hour[i].chance_of_rain != 0) {
+                    chance = data.forecast.forecastday[0].hour[i].chance_of_rain + " %";
+                    
+                }
+
+                else chance = "&nbsp;";
+                console.log(chance);
+
                 firstHalf += `<div class="hourly">
-                    <p id="hour-${i % 24}" class="hourly-time">${data.forecast.forecastday[0].hour[i].time.substring(11, 16)}</p>
+                    <p id="hour-${i % 24}" class="hourly-time mb-0">${data.forecast.forecastday[0].hour[i].time.substring(11, 16)}</p>
+                    <p class="chanceOfRain mb-0">${chance}</p>
                     <p class="hourly-img"><img src="${data.forecast.forecastday[0].hour[i].condition.icon}"></p>
                     <p class="hourly-temp">${data.forecast.forecastday[0].hour[i].temp_c} °C</p>
                     </div>              
                  `;
 
             }
-            
-            
-            
+
+
+
             for (let j = 0; j < thishour; j++) {
-               
+                let chance = "";
+                if (data.forecast.forecastday[1].hour[j].chance_of_rain != 0) {
+                    chance = data.forecast.forecastday[1].hour[j].chance_of_rain + " %";
+                    
+                }
+
+                else chance = "&nbsp;";
+
                 SecondHalf += `<div class="hourly">
-                                <p class="hourly-time">${data.forecast.forecastday[1].hour[j].time.substring(11, 16)}</p>
+                                <p class="hourly-time mb-0">${data.forecast.forecastday[1].hour[j].time.substring(11, 16)}</p>
+                                <p class="chanceOfRain mb-0">${chance}</p>
                                 <p class="hourly-img"><img src="${data.forecast.forecastday[1].hour[j].condition.icon}"></p>
                                 <p class="hourly-temp">${data.forecast.forecastday[1].hour[j].temp_c} °C</p>
                                 </div>              
                              `;
 
             }
-            
+
 
             html = firstHalf + SecondHalf;
-            
+
             document.getElementById('seven-days').innerHTML = html;
-document.getElementsByClassName("hourly-time")[0].innerHTML="Now";
+            document.getElementsByClassName("hourly-time")[0].innerHTML = "Now";
 
 
 
@@ -178,7 +197,7 @@ document.getElementsByClassName("hourly-time")[0].innerHTML="Now";
                 var timestamp = day.date_epoch;
 
                 // console.log(timestamp);
-                var a = new Date(timestamp * 1000);
+                var a = new Date(timestamp * 1000 + 86400000);
 
                 var dayOfWeek = days[a.getDay()];
                 let htmlSegment = `<div class="daily-row"><span>${dayOfWeek}</span><span><img src="${day.day.condition.icon}"></span><span>${day.day.maxtemp_c} °C</span><span>${day.day.mintemp_c} °C</span></div>
