@@ -8,6 +8,10 @@ html {
   --thumbBG: #90A4AE;
 }
 
+body {
+    background-color: #427bff;
+}
+
 ::-webkit-scrollbar {
     width: 20px;
   }
@@ -40,7 +44,7 @@ html {
 .content {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 50px 200px 150px 210px 500px;    
+    grid-template-rows: 50px 200px 150px 180px 500px;    
     padding-top: 10px;
 }
 

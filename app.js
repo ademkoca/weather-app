@@ -78,6 +78,7 @@ function getWeatherData() {
             // document.getElementById('main-container').style.background="linear-gradient(#575b76, #424663)";
             // document.getElementById('main-container').style.background = "url('img/night.jpg')";
             document.getElementById('main-container').style.background = '#222632';
+            document.body.style.backgroundColor = '#222632';
             break;
 
         case 0:
@@ -90,6 +91,7 @@ function getWeatherData() {
             // document.getElementById('main-container').style.background = "linear-gradient(#575b76, #424663)";
         // document.getElementById('main-container').style.background = "url('img/night.jpg')";
         document.getElementById('main-container').style.background = '#222632';
+        document.body.style.backgroundColor = '#222632';
 
     }
     // console.log(welcome);
@@ -138,7 +140,7 @@ function getWeatherData() {
                 }
 
                 else chance = "&nbsp;";
-                console.log(chance);
+                
 
                 firstHalf += `<div class="hourly">
                     <p id="hour-${i % 24}" class="hourly-time mb-0">${data.forecast.forecastday[0].hour[i].time.substring(11, 16)}</p>
