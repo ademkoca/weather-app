@@ -202,7 +202,7 @@ function getWeatherData() {
                 var a = new Date(timestamp * 1000 + 86400000);
 
                 var dayOfWeek = days[a.getDay()];
-                let htmlSegment = `<div class="daily-row"><span>${dayOfWeek}</span><span><img src="${day.day.condition.icon}"></span><span>${day.day.maxtemp_c} °C</span><span>${day.day.mintemp_c} °C</span></div>
+                let htmlSegment = `<div class="daily-row"><span>${dayOfWeek}</span><span><img src="${day.day.condition.icon}"></span><span>${day.day.maxtemp_c} °C</span><span class="mintemp">${day.day.mintemp_c} °C</span></div>
                 `;
                 html += htmlSegment;
                 lastDay = dayOfWeek;
@@ -220,12 +220,37 @@ function getWeatherData() {
             for (let i = nextDay; i < fourthDay; i++) {
                 lastMaxT++;
                 lastMinT++;
-                newHtml += `<div class="daily-row"><span>${days[i % 7]}</span><span><img src="${lastIcon}"></span><span>${lastMaxT} °C</span><span>${lastMinT} °C</span></div>
+                newHtml += `<div class="daily-row"><span>${days[i % 7]}</span><span><img src="${lastIcon}"></span><span>${lastMaxT} °C</span><span class="mintemp">${lastMinT} °C</span></div>
             `;
                 // console.log(newHtml);
                 document.getElementById('daily').innerHTML = html + newHtml;
-            }
+            };
 
+            html="";
+            let timenow = new Date();
+            let thishour = timenow.getHours();
+            console.log(thishour);
+            data.forecast.forecastday.forEach(day => {
+                newHtml=`
+                <div class="today-cell"><p class="today-title mb-0">sunrise</p><p class="today-value mb-0">${day.astro.sunrise}</p></div>
+                <div class="today-cell"><p class="today-title mb-0">sunset</p><p class="today-value mb-0">${day.astro.sunset}</p></div>
+                <div class="today-cell"><p class="today-title mb-0">chance of rain</p><p class="today-value mb-0">${day.day.daily_chance_of_rain} %</p></div>
+                <div class="today-cell"><p class="today-title mb-0">humidity</p><p class="today-value mb-0">${day.day.avghumidity} %</p></div>
+                <div class="today-cell"><p class="today-title mb-0">wind</p><p class="today-value mb-0">${(day.day.maxwind_kph/ 3.6).toString().substring(0, 3)} m/s</p></div>
+                <div class="today-cell"><p class="today-title mb-0">feels like</p><p class="today-value mb-0">${day.hour[thishour].feelslike_c} °C</p></div>
+                <div class="today-cell"><p class="today-title mb-0">percipitation</p><p class="today-value mb-0">${day.day.totalprecip_mm} mm</p></div>
+                <div class="today-cell"><p class="today-title mb-0">pressure</p><p class="today-value mb-0">${day.hour[thishour].pressure_mb} mb</p></div>
+                <div class="today-cell"><p class="today-title mb-0">visibility</p><p class="today-value mb-0">${day.day.avgvis_km} km</p></div>
+                <div class="today-cell"><p class="today-title mb-0">uv index</p><p class="today-value mb-0">${day.day.uv}</p></div>
+                
+                `    
+                
+                day.astro
+
+            });
+
+
+            document.getElementById('today').innerHTML = html + newHtml;
 
         });
 
