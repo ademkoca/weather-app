@@ -37,6 +37,7 @@ body {
     background-color:#427bff;
     /* background: linear-gradient(#45dce3, #0ba4cd); */
     position: relative; 
+    max-width: 100%;
   
 
 }
@@ -150,6 +151,7 @@ grid-template-columns: 1.5fr 1.5fr 1fr 1fr;
 footer {
  background-color: white;
  text-align: center;
+ max-width: 100% !important;
 }
 footer a {
     text-decoration: none;
