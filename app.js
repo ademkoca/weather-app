@@ -226,6 +226,13 @@ function getWeatherData() {
                 document.getElementById('daily').innerHTML = html + newHtml;
             };
 
+        });
+
+        url = "https://api.weatherapi.com/v1/forecast.json?key=ffa4e34cd31f4237bb4155138212309&q=" + query_part + "&days=1&aqi=no&alerts=no";
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+
             html="";
             let timenow = new Date();
             let thishour = timenow.getHours();
@@ -243,16 +250,14 @@ function getWeatherData() {
                 <div class="today-cell"><p class="today-title mb-0">visibility</p><p class="today-value mb-0">${day.day.avgvis_km} km</p></div>
                 <div class="today-cell"><p class="today-title mb-0">uv index</p><p class="today-value mb-0">${day.day.uv}</p></div>
                 
-                `    
-                
-                day.astro
-
+                `;
             });
 
 
             document.getElementById('today').innerHTML = html + newHtml;
-
         });
+
+        
 
     // }
     // else console.log("no data!");
