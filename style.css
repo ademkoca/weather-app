@@ -193,3 +193,11 @@ footer span {
 footer strong {
     margin-right: 5px;
 }
+
+button[type=button].toast-btn {
+    position: static;
+}
+.toast-link, .toast-link:hover, .toast-link:active, .toast-link:link, .toast-link:visited {
+    text-decoration: none;
+    color: #ffffff;
+}
