@@ -50,6 +50,7 @@ function set_query_part() {
 function getWeatherData() {
     var d = new Date();
     let time = d.getHours();
+    console.log("Now is: " + time)
     let welcome = "";
     switch (time) {
         case 6:
@@ -89,9 +90,9 @@ function getWeatherData() {
         case 2:
         default: welcome = "Good morning";
             // document.getElementById('main-container').style.background = "linear-gradient(#575b76, #424663)";
-        // document.getElementById('main-container').style.background = "url('img/night.jpg')";
-        document.getElementById('main-container').style.background = '#222632';
-        document.body.style.backgroundColor = '#222632';
+            // document.getElementById('main-container').style.background = "url('img/night.jpg')";
+            document.getElementById('main-container').style.background = '#222632';
+            document.body.style.backgroundColor = '#222632';
 
     }
     // console.log(welcome);
@@ -111,7 +112,7 @@ function getWeatherData() {
 
                 // });
                 let htmlSegment = `<h1>${welcome}</h1>
-          <div class="clock" id="timeNow">${data.current.temp_c} °C</div>
+          <div class="clock" id="timeNow">${data.forecast.forecastday[0].hour[time].temp_c} °C</div>
           <p class="weather-p" id="location">in ${data.location.name}, ${data.location.country}</p>              
               `;
                 document.getElementById('weather-data').innerHTML = htmlSegment;
@@ -136,11 +137,11 @@ function getWeatherData() {
                 let chance = "";
                 if (data.forecast.forecastday[0].hour[i].chance_of_rain != 0) {
                     chance = data.forecast.forecastday[0].hour[i].chance_of_rain + " %";
-                    
+
                 }
 
                 else chance = "&nbsp;";
-                
+
 
                 firstHalf += `<div class="hourly">
                     <p id="hour-${i % 24}" class="hourly-time mb-0">${data.forecast.forecastday[0].hour[i].time.substring(11, 16)}</p>
@@ -158,7 +159,7 @@ function getWeatherData() {
                 let chance = "";
                 if (data.forecast.forecastday[1].hour[j].chance_of_rain != 0) {
                     chance = data.forecast.forecastday[1].hour[j].chance_of_rain + " %";
-                    
+
                 }
 
                 else chance = "&nbsp;";
@@ -228,22 +229,22 @@ function getWeatherData() {
 
         });
 
-        url = "https://api.weatherapi.com/v1/forecast.json?key=ffa4e34cd31f4237bb4155138212309&q=" + query_part + "&days=1&aqi=no&alerts=no";
-        fetch(url)
+    url = "https://api.weatherapi.com/v1/forecast.json?key=ffa4e34cd31f4237bb4155138212309&q=" + query_part + "&days=1&aqi=no&alerts=no";
+    fetch(url)
         .then(response => response.json())
         .then(data => {
 
-            html="";
+            html = "";
             let timenow = new Date();
             let thishour = timenow.getHours();
             console.log(thishour);
             data.forecast.forecastday.forEach(day => {
-                newHtml=`
+                newHtml = `
                 <div class="today-cell"><p class="today-title mb-0">sunrise</p><p class="today-value mb-0">${day.astro.sunrise}</p></div>
                 <div class="today-cell"><p class="today-title mb-0">sunset</p><p class="today-value mb-0">${day.astro.sunset}</p></div>
                 <div class="today-cell"><p class="today-title mb-0">chance of rain</p><p class="today-value mb-0">${day.day.daily_chance_of_rain} %</p></div>
                 <div class="today-cell"><p class="today-title mb-0">humidity</p><p class="today-value mb-0">${day.day.avghumidity} %</p></div>
-                <div class="today-cell"><p class="today-title mb-0">wind</p><p class="today-value mb-0">${(day.day.maxwind_kph/ 3.6).toString().substring(0, 3)} m/s</p></div>
+                <div class="today-cell"><p class="today-title mb-0">wind</p><p class="today-value mb-0">${(day.day.maxwind_kph / 3.6).toString().substring(0, 3)} m/s</p></div>
                 <div class="today-cell"><p class="today-title mb-0">feels like</p><p class="today-value mb-0">${day.hour[thishour].feelslike_c} °C</p></div>
                 <div class="today-cell"><p class="today-title mb-0">percipitation</p><p class="today-value mb-0">${day.day.totalprecip_mm} mm</p></div>
                 <div class="today-cell"><p class="today-title mb-0">pressure</p><p class="today-value mb-0">${day.hour[thishour].pressure_mb} mb</p></div>
@@ -257,7 +258,7 @@ function getWeatherData() {
             document.getElementById('today').innerHTML = html + newHtml;
         });
 
-        
+
 
     // }
     // else console.log("no data!");
